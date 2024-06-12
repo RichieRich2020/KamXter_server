@@ -1,0 +1,36 @@
+{
+  "name": "barter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "dev": "tsx watch index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Abhijeet",
+  "license": "ISC",
+  "dependencies": {
+    "@types/express": "^4.17.21",
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.3.5"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.2",
+    "@types/body-parser": "^1.19.2",
+    "@types/cookie-parser": "^1.4.7",
+    "@types/cors": "^2.8.13",
+    "@types/express": "^4.17.17",
+    "@types/jsonwebtoken": "^9.0.2",
+    "@types/multer": "^1.4.7",
+    "@types/node": "^20.12.12",
+    "@types/nodemailer": "^6.4.9",
+    "@types/nodemon": "^1.19.2",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.10.2",
+    "typescript": "^5.4.5"
+  }
+}
