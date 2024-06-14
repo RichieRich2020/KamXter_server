@@ -1,8 +1,12 @@
 import mongoose from "mongoose"
+import dotenv from "dotenv"
 
+dotenv.config()
+const mongodb_url: any = process.env.MONGODB_URI
+console.log(mongodb_url)
 const connectDB = async () => {
   try {
-    await mongoose.connect("mongodb://127.0.0.1:27017/mydata", {
+    await mongoose.connect(mongodb_url, {
       // Recommended to avoid deprecated functions
     })
     console.log("Database connected")

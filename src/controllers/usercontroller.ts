@@ -68,15 +68,13 @@ export const User_Login = async (req: Request, res: Response) => {
 
     res
       .status(200)
-      .cookie("token", token, {
+      .cookie("testCookie", token, {
         httpOnly: true, // The HttpOnly attribute
         secure: false, // Set to true if using HTTPS
         maxAge: 3600000, // 1 hour expiration
-        path: "/",
+        sameSite: "lax",
       })
       .json({ message: "Login successful" })
-
-    console.log(res)
   } catch (error) {
     res.status(500).json({ message: "Server error", error })
   }

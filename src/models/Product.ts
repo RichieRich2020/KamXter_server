@@ -3,7 +3,7 @@ import mongoose, { Document, model, Schema } from "mongoose"
 interface IProduct extends Document {
   title: string
   content: string
-  imageUrl: string
+  imageUrl: string[]
   price: Number
   seller: mongoose.Types.ObjectId
   address: string
@@ -27,7 +27,7 @@ const ProductSchema: Schema = new Schema<IProduct>({
     required: true,
   },
   imageUrl: {
-    type: String,
+    type: [String],
     required: true,
   },
   price: {

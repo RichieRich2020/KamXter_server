@@ -7,45 +7,27 @@ const authorizationMiddleware = (
   res: Response,
   next: NextFunction
 ) => {
-  // Extract the JWT token from the request headers or wherever it's sent
-  const token =
-    req.headers.authorization && req.headers.authorization.split(" ")[1]
+  // Check if auth token cookie exists
 
+  const token = req.cookies.testCookie
+  console.log(req.cookies.testCookie)
   if (!token) {
-    return res.status(401).json({ error: "Authorization token not provided" })
+    return res.status(401).json({ message: "Authorization token not found" })
   }
 
-  // Verify the JWT token
-  jwt.verify(
-    token,
-    "your_jwt_secret",
-    (err: VerifyErrors | null, decodedToken: any) => {
-      if (err) {
-        return res.status(401).json({ error: "Invalid token" })
-      } else {
-        // Token is valid, you can extract user information from decodedToken
-        // Check if the user exists in the database and has necessary permissions
-        User.findById(decodedToken.userId)
-          .then((user: any) => {
-            if (!user) {
-              return res.status(401).json({ error: "User not found" })
-            }
+  try {
+    // Verify JWT token
+    // const decoded :any = jwt.verify(token, 'your_secret_key'); // Replace 'your_secret_key' with your actual secret key
 
-            // Check if the user has necessary permissions to access the resource
-            // For example, you might have roles or permissions stored in the user object
-            // Here you would implement your authorization logic based on user roles or permissions
-
-            // If the user is authorized, you can attach user information to the request for further processing
-            ;(req as any).user = user
-            next() // Call next middleware
-          })
-          .catch((err) => {
-            console.error("Error finding user:", err)
-            return res.status(500).json({ error: "Internal server error" })
-          })
-      }
-    }
-  )
+    // Attach decoded payload to request object
+    jwt.verify(token, "your_jwt_secret", (err: any, decoded: any) => {
+      if (err) return res.sendStatus(403)
+      req.body.user = decoded
+      next()
+    })
+  } catch (err) {
+    return res.status(401).json({ message: "Invalid token" })
+  }
 }
 
 export default authorizationMiddleware

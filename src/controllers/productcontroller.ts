@@ -10,36 +10,44 @@ export const Upload_Product = async (req: Request, res: Response) => {
     content,
     seller,
     price,
-    imageUrl,
     address,
-    billimage,
     usage,
     brand,
     original_price,
   } = req.body
 
   try {
-    // Create a new post with user ID
-    const newPost = new Product({
+    console.log(req.files)
+    const files = req.files as
+      | { [fieldname: string]: Express.Multer.File[] }
+      | undefined
+
+    // Use optional chaining to handle potential undefined values
+    const imageUrls = files?.["imageUrl"]?.map((file) => file.filename) || []
+    const billImageUrl = files?.["billimage"]?.[0]?.filename || ""
+
+    if (!billImageUrl || imageUrls.length === 0) {
+      return res
+        .status(400)
+        .json({ message: "Both imageUrl and billimage are required" })
+    }
+
+    // Create a new product with the extracted file paths
+    const product = await Product.create({
       title,
       content,
       seller,
       price,
-      imageUrl,
       address,
-      billimage,
       usage,
       brand,
       original_price,
+      imageUrl: imageUrls, // Save imageUrls as an array
+      billimage: billImageUrl, // Save billimage as a string
     })
 
-    // Save the new post to the database
-    const savedPost = await newPost.save()
-
     // Respond with the saved post
-    res
-      .status(201)
-      .json({ message: "product uploaded successfully", savedPost })
+    res.status(201).json({ message: "product uploaded successfully" })
   } catch (error) {
     // If there's an error, respond with an error message
     res
