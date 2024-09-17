@@ -1,8 +1,8 @@
-<a href="https://github.com/aljithkj02/pixhub-client">Frontend Github</a>
 </br>
 </br>
 
 # Pixhub
+
 <p> Pixhub is a social media app that allows users to create an account, update their profile, post updates, view other users' posts, follow other users, and search for users. </p>
 
 </br>
@@ -18,7 +18,9 @@
 <p> Searching for users by name </p>
 
 ## Usage
+
 ### To use Pixhub, follow these steps:
+
 </br>
 <p> Sign up for an account or log in to an existing account. </p>
 <img src="./images/login.png" />
@@ -31,7 +33,6 @@
 <img src="./images/update-profile.png" />
 </br></br>
 <img src="./images/updated-profile.png" />
-
 
 </br></br>
 
@@ -54,6 +55,3 @@
 <img src="./images/search.png" />
 
 </br></br>
-
-## Contact
-If you have any questions or issues with Pixhub, please contact us at aljithkj02@gmail.com
